@@ -1,7 +1,7 @@
-package com.start.homework.utils;
+package com.stark.homework.utils;
 
-public enum Gender {
-    MALE(1), FEMAILE(2) {
+public enum Job {
+    HEAD_TEACHER(1), TEACHER(2), HEAD_OF_STUDENT(3), HEAD_OF_TEACHER(4), CONSULTANT(5) {
         public boolean isRest() {
             return true;
         }
@@ -9,7 +9,7 @@ public enum Gender {
 
     private int value;
 
-    private Gender(int value) {
+    Job(int value) {
         this.value = value;
     }
 

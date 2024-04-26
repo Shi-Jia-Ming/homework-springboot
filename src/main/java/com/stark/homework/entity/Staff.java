@@ -1,10 +1,10 @@
-package com.start.homework.entity;
+package com.stark.homework.entity;
 
 import java.sql.Date;
 
 import org.springframework.boot.autoconfigure.batch.BatchProperties.Job;
 
-import com.start.homework.utils.Gender;
+import com.stark.homework.utils.Gender;
 
 import lombok.Data;
 

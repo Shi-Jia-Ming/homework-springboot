@@ -1,4 +1,4 @@
-package com.start.homework.entity;
+package com.stark.homework.entity;
 
 import lombok.Data;
 
