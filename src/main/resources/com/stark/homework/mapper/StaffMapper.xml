@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.stark.homework.mapper.StaffMapper">
 
-    <resultMap id="staffResultMap" type="com.stark.homework.entity.Department">
+    <resultMap id="staffResultMap" type="com.stark.homework.entity.Staff">
         <id property="id" column="id" />
         <result property="username" column="username" />
         <result property="password" column="password" />
@@ -15,7 +15,7 @@
         <result property="entryDate" column="entry_date" />
         <result property="createAt" column="create_at" />
         <result property="updateAt" column="update_at" />
-        <association property="department" column="dept_id" select="com.stark.homework.mapper.DepartmentMapper"
+        <association property="department" column="dept_id" select="com.stark.homework.mapper.DepartmentMapper.selectById"
                      javaType="com.stark.homework.entity.Department"/>
     </resultMap>
 
@@ -23,6 +23,11 @@
     <select id="selectById" resultMap="staffResultMap">
         select * from staff
         where id = #{id};
+    </select>
+
+    <select id="selectByUsername" resultMap="staffResultMap" parameterType="string">
+        select * from staff
+        where username = #{username};
     </select>
 
 
@@ -34,7 +39,7 @@
     </delete>
 
     <!-- 插入语句 -->
-    <insert useGenerateKey="true" propertyKey="id">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into staff(username, password, name, gender, image, job, entry_date, dept_id, create_at, update_at)
         value (#{username}, #{password}, #{name}, #{gender}, #{image}, #{job}, #{entryDate}, #{department.id}, #{createAt}, #{updateAt});
     </insert>

@@ -26,7 +26,7 @@
     </delete>
 
     <!-- 插入语句 -->
-    <insert useGenerateKey="true" propertyKey="id">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into department(name, create_at, update_at)
         value (#{name}, #{createAt}, #{updateAt});
     </insert>
