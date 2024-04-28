@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stark.homework.mapper.StaffMapper">
+
+    <resultMap id="staffResultMap" type="com.stark.homework.entity.Department">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="name" column="name" />
+        <result property="gender" column="gender" />
+        <result property="image" column="image" />
+        <result property="job" column="job" />
+        <result property="entryDate" column="entry_date" />
+        <result property="createAt" column="create_at" />
+        <result property="updateAt" column="update_at" />
+        <association property="department" column="dept_id" select="com.stark.homework.mapper.DepartmentMapper"
+                     javaType="com.stark.homework.entity.Department"/>
+    </resultMap>
+
+    <!-- 查询语句 -->
+    <select id="selectById" resultMap="staffResultMap">
+        select * from staff
+        where id = #{id};
+    </select>
+
+
+    <!-- 删除语句 -->
+    <delete id="delete">
+        delete
+        from staff
+        where id = #{id};
+    </delete>
+
+    <!-- 插入语句 -->
+    <insert useGenerateKey="true" propertyKey="id">
+        insert into staff(username, password, name, gender, image, job, entry_date, dept_id, create_at, update_at)
+        value (#{username}, #{password}, #{name}, #{gender}, #{image}, #{job}, #{entryDate}, #{department.id}, #{createAt}, #{updateAt});
+    </insert>
+
+    <!-- 更新语句 -->
+    <update id="update">
+        update staff
+        set username=#{username},
+            password=#{password},
+            name=#{name},
+            gender=#{gender},
+            image=#{image},
+            job=#{job},
+            entry_date=#{entryDate},
+            dept_id=#{department.id},
+            create_at=#{createAt},
+            update_at=#{updateAt}
+        where id = #{id};
+    </update>
+</mapper>

@@ -1,4 +1,4 @@
-package com.start.homework;
+package com.stark.homework;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
