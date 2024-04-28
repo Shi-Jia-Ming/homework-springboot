@@ -17,6 +17,9 @@
         where id = #{id};
     </select>
 
+    <select id="selectAll" resultMap="departmentResultMap">
+        select * from department;
+    </select>
 
     <!-- 删除语句 -->
     <delete id="delete">
