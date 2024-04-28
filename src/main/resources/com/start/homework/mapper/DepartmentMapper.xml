@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stark.homework.mapper.DepartmentMapper">
+
+    <resultMap id="departmentResultMap" type="com.stark.homework.entity.Department">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="createAt" column="create_at" />
+        <result property="updateAt" column="update_at" />
+    </resultMap>
+
+    <!-- 查询语句 -->
+    <select id="selectById" resultMap="departmentResultMap">
+        select * from department
+        where id = #{id};
+    </select>
+
+
+    <!-- 删除语句 -->
+    <delete id="delete">
+        delete
+        from department
+        where id = #{id};
+    </delete>
+
+    <!-- 插入语句 -->
+    <insert useGenerateKey="true" propertyKey="id">
+        insert into department(name, create_at, update_at)
+        value (#{name}, #{createAt}, #{updateAt});
+    </insert>
+
+    <!-- 更新语句 -->
+    <update id="update">
+        update department
+        set name=#{name},
+            create_at=#{createAt},
+            update_at=#{updateAt}
+        where id = #{id};
+    </update>
+</mapper>
