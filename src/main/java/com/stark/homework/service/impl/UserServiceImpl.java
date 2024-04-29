@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     public Map<String, Object> login(String username, String password) {
         // 在数据库中查询用户信息
         Map<String, Object> result = new HashMap<>();
-        Staff staff = this.staffMapper.selectByUsername(username);
+        Staff staff = staffMapper.selectByUsername(username);
         if (staff == null) {
             result.put("code", 1);
             result.put("msg", "未查询到该用户");

@@ -17,6 +17,11 @@
         where id = #{id};
     </select>
 
+    <select id="selectByName" resultMap="departmentResultMap">
+        select * from department
+        where name = #{name};
+    </select>
+
     <select id="selectAll" resultMap="departmentResultMap">
         select * from department;
     </select>

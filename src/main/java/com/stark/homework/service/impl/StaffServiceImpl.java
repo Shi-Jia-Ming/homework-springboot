@@ -20,6 +20,6 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public List<Staff> getAll() {
-        return this.staffMapper.selectAll();
+        return staffMapper.selectAll();
     }
 }

@@ -18,6 +18,14 @@ public interface DepartmentMapper {
     Department selectById(int id);
 
     /**
+     * 通过部门名称查询部门信息
+     *
+     * @param name 部门名称
+     * @return 部门信息
+     */
+    Department selectByName(String name);
+
+    /**
      * 获取所有部门信息
      *
      * @return 部门信息列表

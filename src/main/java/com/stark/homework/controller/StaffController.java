@@ -21,6 +21,14 @@ public class StaffController {
         this.staffService = staffService;
     }
 
+    /**
+     * 获取所有员工信息
+     *
+     * @param token    用户 token
+     * @param id       用户 id
+     * @param username 用户名
+     * @return 员工信息列表
+     */
     @PostMapping("getAll")
     public ResponseEntity<Object> getAll(
             @RequestHeader("Token") String token,
