@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import org.springframework.boot.autoconfigure.batch.BatchProperties.Job;
 
-import com.stark.homework.utils.Gender;
+import com.stark.homework.enums.Gender;
 
 import lombok.Data;
 
@@ -19,11 +19,11 @@ public class Staff {
     // 姓名
     private String name;
     // 性别
-    private Gender gender;
+    private int gender;
     // 图像
     private String image;
     // 职务
-    private Job job;
+    private int job;
     // 入职时间
     private Date entryDate;
     // 所属的部门
