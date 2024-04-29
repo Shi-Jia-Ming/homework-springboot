@@ -17,6 +17,14 @@
         where id = #{id};
     </select>
 
+    <select id="selectByName" resultMap="departmentResultMap">
+        select * from department
+        where name = #{name};
+    </select>
+
+    <select id="selectAll" resultMap="departmentResultMap">
+        select * from department;
+    </select>
 
     <!-- 删除语句 -->
     <delete id="delete">
@@ -26,7 +34,7 @@
     </delete>
 
     <!-- 插入语句 -->
-    <insert useGenerateKey="true" propertyKey="id">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into department(name, create_at, update_at)
         value (#{name}, #{createAt}, #{updateAt});
     </insert>
