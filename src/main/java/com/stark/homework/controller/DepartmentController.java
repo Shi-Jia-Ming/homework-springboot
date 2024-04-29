@@ -100,9 +100,14 @@ public class DepartmentController {
         if (!JwtAuthentication.authentication(token, id, username)) {
             return new Response("编辑部门信息").error("Jwt 验证失败");
         }
+        System.out.println(department.toString());
         // 判断该部门是否存在
         if (!departmentService.isExist(department.getId())) {
             return new Response("编辑部门信息").error("该部门不存在");
+        }
+        // 判断新名称是否已经被占用
+        if (departmentService.isExist(department.getName())) {
+            return new Response("编辑部门信息").error("该名称已存在");
         }
         departmentService.update(department);
         return new Response("编辑部门信息").ok("成功");
