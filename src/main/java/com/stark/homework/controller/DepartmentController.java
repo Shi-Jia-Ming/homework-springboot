@@ -36,11 +36,11 @@ public class DepartmentController {
      * @return 部门信息列表
      */
     @Operation(summary = "获取所有部门信息")
-    @PostMapping("getAll")
+    @GetMapping("getAll")
     public ResponseEntity<Object> getAll(
             @RequestHeader("Token") String token,
             @RequestHeader("User-Id") int id,
-            @RequestParam("username") String username
+            @RequestHeader("Username") String username
     ) {
         // 进行 Jwt 验证
         if (!JwtAuthentication.authentication(token, id, username)) {
@@ -64,7 +64,7 @@ public class DepartmentController {
     public ResponseEntity<Object> create(
             @RequestHeader("Token") String token,
             @RequestHeader("User-Id") int id,
-            @RequestParam("username") String username,
+            @RequestHeader("Username") String username,
             @RequestParam("departmentName") String departmentName
     ) {
         // 进行 Jwt 验证
@@ -93,7 +93,7 @@ public class DepartmentController {
     public ResponseEntity<Object> edit(
             @RequestHeader("Token") String token,
             @RequestHeader("User-Id") int id,
-            @RequestParam("username") String username,
+            @RequestHeader("Username") String username,
             @RequestParam("department") Department department
     ) {
         // 进行 Jwt 验证

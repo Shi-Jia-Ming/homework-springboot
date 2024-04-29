@@ -29,11 +29,11 @@ public class StaffController {
      * @param username 用户名
      * @return 员工信息列表
      */
-    @PostMapping("getAll")
+    @GetMapping("getAll")
     public ResponseEntity<Object> getAll(
             @RequestHeader("Token") String token,
             @RequestHeader("User-Id") int id,
-            @RequestParam("username") String username
+            @RequestHeader("Username") String username
     ) {
         // 进行 Jwt 验证
         if (!JwtAuthentication.authentication(token, id, username)) {
