@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.stark.homework.entity.Staff;
 
+import java.util.List;
+
 @Mapper
 public interface StaffMapper {
 
@@ -22,6 +24,13 @@ public interface StaffMapper {
      * @return 员工数据
      */
     Staff selectByUsername(String username);
+
+    /**
+     * 获取所有员工信息
+     *
+     * @return 员工信息列表
+     */
+    List<Staff> selectAll();
 
     /**
      * 删除员工数据

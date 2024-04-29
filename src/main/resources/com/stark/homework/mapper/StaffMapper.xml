@@ -30,6 +30,10 @@
         where username = #{username};
     </select>
 
+    <select id="selectAll" resultMap="staffResultMap">
+        select * from staff;
+    </select>
+
 
     <!-- 删除语句 -->
     <delete id="delete">

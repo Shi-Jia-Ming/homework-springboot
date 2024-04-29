@@ -18,6 +18,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         this.departmentMapper = departmentMapper;
     }
 
+    @Override
     public List<Department> getAll() {
         return departmentMapper.selectAll();
     }
