@@ -31,6 +31,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public boolean isExist(int departmentId) {
+        Department department = departmentMapper.selectById(departmentId);
+        return !(department == null);
+    }
+
+    @Override
     public int create(String departmentName) {
         // 新建 Department 对象
         Department department = new Department();
@@ -40,5 +46,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         // 插入部门信息
         departmentMapper.insert(department);
         return department.getId();
+    }
+
+    @Override
+    public void update(Department department) {
+        departmentMapper.update(department);
     }
 }

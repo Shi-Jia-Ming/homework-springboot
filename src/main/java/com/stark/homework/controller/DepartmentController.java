@@ -78,4 +78,33 @@ public class DepartmentController {
         int departmentId = departmentService.create(departmentName);
         return new Response("新建部门信息").ok(departmentId, "成功");
     }
+
+    /**
+     * 编辑部门信息
+     *
+     * @param token      用户 token
+     * @param id         用户 id
+     * @param username   用户名
+     * @param department 新的部门信息
+     * @return 新建部门的 id
+     */
+    @Operation(summary = "编辑部门信息")
+    @PostMapping("edit")
+    public ResponseEntity<Object> edit(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestParam("username") String username,
+            @RequestParam("department") Department department
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("编辑部门信息").error("Jwt 验证失败");
+        }
+        // 判断该部门是否存在
+        if (!departmentService.isExist(department.getId())) {
+            return new Response("编辑部门信息").error("该部门不存在");
+        }
+        departmentService.update(department);
+        return new Response("编辑部门信息").ok("成功");
+    }
 }

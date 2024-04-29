@@ -16,12 +16,20 @@ public interface DepartmentService {
     List<Department> getAll();
 
     /**
-     * 查询部门是否存在
+     * 根据部门名称查询部门是否存在
      *
      * @param departmentName 部门名称
      * @return 部门是否存在
      */
     boolean isExist(String departmentName);
+
+    /**
+     * 根据部门 id 查询部门是否存在
+     *
+     * @param departmentId 部门 id
+     * @return 部门是否存在
+     */
+    boolean isExist(int departmentId);
 
     /**
      * 新建部门信息
@@ -30,4 +38,11 @@ public interface DepartmentService {
      * @return 新建部门的 id
      */
     int create(String departmentName);
+
+    /**
+     * 更新部门信息
+     *
+     * @param department 新的部门信息
+     */
+    void update(Department department);
 }
