@@ -47,4 +47,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void update(Department department) {
         departmentMapper.update(department);
     }
+
+    @Override
+    public void delete(Department department) {
+        departmentMapper.delete(department);
+    }
 }

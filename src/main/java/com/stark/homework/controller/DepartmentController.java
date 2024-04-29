@@ -5,9 +5,6 @@ import com.stark.homework.service.DepartmentService;
 import com.stark.homework.utils.JwtAuthentication;
 import com.stark.homework.utils.Response;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
-import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -86,7 +83,7 @@ public class DepartmentController {
      * @param id         用户 id
      * @param username   用户名
      * @param department 新的部门信息
-     * @return 新建部门的 id
+     * @return 编辑状态
      */
     @Operation(summary = "编辑部门信息")
     @PostMapping("edit")
@@ -110,5 +107,34 @@ public class DepartmentController {
         }
         departmentService.update(department);
         return new Response("编辑部门信息").ok("成功");
+    }
+
+    /**
+     * 删除部门信息
+     * @param token      用户 token
+     * @param id         用户 id
+     * @param username   用户名
+     * @param department 新的部门信息
+     * @return 删除状态
+     */
+    @Operation(summary = "删除部门信息")
+    @PostMapping("delete")
+    public ResponseEntity<Object> delete(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username,
+            @RequestBody Department department
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("删除部门信息").error("Jwt 验证失败");
+        }
+        // 判断该部门是否存在
+        System.out.println(department);
+        if (!departmentService.isExist(department.getId())) {
+            return new Response("删除部门信息").error("该部门不存在");
+        }
+        departmentService.delete(department);
+        return new Response("删除部门信息").ok("成功");
     }
 }

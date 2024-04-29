@@ -45,4 +45,11 @@ public interface DepartmentService {
      * @param department 新的部门信息
      */
     void update(Department department);
+
+    /**
+     * 删除部门信息
+     *
+     * @param department 待删除的部门信息
+     */
+    void delete(Department department);
 }
