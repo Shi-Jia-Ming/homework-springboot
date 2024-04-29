@@ -94,13 +94,12 @@ public class DepartmentController {
             @RequestHeader("Token") String token,
             @RequestHeader("User-Id") int id,
             @RequestHeader("Username") String username,
-            @RequestParam("department") Department department
+            @RequestBody Department department
     ) {
         // 进行 Jwt 验证
         if (!JwtAuthentication.authentication(token, id, username)) {
             return new Response("编辑部门信息").error("Jwt 验证失败");
         }
-        System.out.println(department.toString());
         // 判断该部门是否存在
         if (!departmentService.isExist(department.getId())) {
             return new Response("编辑部门信息").error("该部门不存在");
