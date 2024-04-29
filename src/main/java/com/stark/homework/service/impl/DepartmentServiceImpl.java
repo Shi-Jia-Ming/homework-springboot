@@ -37,12 +37,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public int create(String departmentName) {
-        // 新建 Department 对象
-        Department department = new Department();
-        department.setName(departmentName);
-        department.setCreateAt(new Date());
-        department.setUpdateAt(new Date());
+    public int create(Department department) {
         // 插入部门信息
         departmentMapper.insert(department);
         return department.getId();

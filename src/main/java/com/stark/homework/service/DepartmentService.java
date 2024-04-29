@@ -34,10 +34,10 @@ public interface DepartmentService {
     /**
      * 新建部门信息
      *
-     * @param departmentName 部门名称
+     * @param department 部门信息
      * @return 新建部门的 id
      */
-    int create(String departmentName);
+    int create(Department department);
 
     /**
      * 更新部门信息

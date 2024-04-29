@@ -53,10 +53,10 @@ public class DepartmentController {
     /**
      * 新建部门信息
      *
-     * @param token          用户 token
-     * @param id             用户 id
-     * @param username       用户名
-     * @param departmentName 部门名称
+     * @param token      用户 token
+     * @param id         用户 id
+     * @param username   用户名
+     * @param department 部门信息
      * @return 新建部门的 id
      */
     @Operation(summary = "新建部门信息")
@@ -65,17 +65,17 @@ public class DepartmentController {
             @RequestHeader("Token") String token,
             @RequestHeader("User-Id") int id,
             @RequestHeader("Username") String username,
-            @RequestParam("departmentName") String departmentName
+            @RequestBody Department department
     ) {
         // 进行 Jwt 验证
         if (!JwtAuthentication.authentication(token, id, username)) {
             return new Response("新建部门信息").error("Jwt 验证失败");
         }
         // 判断该部门是否已经存在
-        if (departmentService.isExist(departmentName)) {
+        if (departmentService.isExist(department.getName())) {
             return new Response("新建部门信息").error("该部门已存在");
         }
-        int departmentId = departmentService.create(departmentName);
+        int departmentId = departmentService.create(department);
         return new Response("新建部门信息").ok(departmentId, "成功");
     }
 
