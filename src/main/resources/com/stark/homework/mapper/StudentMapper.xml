@@ -20,7 +20,14 @@
     </resultMap>
 
     <!-- 查询语句 -->
+    <select id="selectById" resultMap="studentResultMap">
+        select * from student
+        where id = #{id};
+    </select>
 
+    <select id="selectAll" resultMap="studentResultMap">
+        select * from student;
+    </select>
 
     <!-- 删除语句 -->
 
