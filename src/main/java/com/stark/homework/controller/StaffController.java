@@ -4,6 +4,7 @@ import com.stark.homework.entity.Staff;
 import com.stark.homework.service.StaffService;
 import com.stark.homework.utils.JwtAuthentication;
 import com.stark.homework.utils.Response;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,5 +42,30 @@ public class StaffController {
         }
         List<Staff> staff = staffService.getAll();
         return new Response("获取员工数据").ok(staff, "成功");
+    }
+
+    /**
+     * 根据部分员工信息模糊查询
+     *
+     * @param token    用户 token
+     * @param id       用户 id
+     * @param username 用户名
+     * @param staff    部分员工信息
+     * @return 符合条件的查询结果
+     */
+    @Operation(summary = "对员工信息进行模糊查询")
+    @PostMapping("search")
+    public ResponseEntity<Object> search(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username,
+            @RequestBody Staff staff
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("员工信息模糊查询").error("Jwt 验证失败");
+        }
+        List<Staff> staffList = staffService.search(staff);
+        return new Response("员工信息模糊查询").ok(staffList, "成功");
     }
 }

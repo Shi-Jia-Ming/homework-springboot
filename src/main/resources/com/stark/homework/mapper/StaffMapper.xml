@@ -30,6 +30,20 @@
         where username = #{username};
     </select>
 
+    <select id="selectWithLike" resultMap="staffResultMap" parameterType="com.stark.homework.entity.Staff">
+        select * from staff
+        where id != -1
+        <if test="name != null">
+            and name = #{name}
+        </if>
+        <if test="gender">
+            and gender = #{gender}
+        </if>
+        <if test="entryDate">
+            and entry_date = #{entryDate}
+        </if>
+    </select>
+
     <select id="selectAll" resultMap="staffResultMap">
         select * from staff;
     </select>

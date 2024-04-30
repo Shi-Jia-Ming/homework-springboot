@@ -22,4 +22,9 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff> getAll() {
         return staffMapper.selectAll();
     }
+
+    @Override
+    public List<Staff> search(Staff staff) {
+        return staffMapper.selectWithLike(staff);
+    }
 }
