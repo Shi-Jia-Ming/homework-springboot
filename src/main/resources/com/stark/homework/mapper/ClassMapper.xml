@@ -17,8 +17,10 @@
     </resultMap>
 
     <!-- 查询语句 -->
-
-
+    <select id="selectById" resultMap="classResultMap">
+        select * from class
+        where id = #{id};
+    </select>
 
     <!-- 删除语句 -->
 

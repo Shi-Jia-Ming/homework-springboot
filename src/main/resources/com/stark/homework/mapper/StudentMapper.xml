@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stark.homework.mapper.StudentMapper">
+
+    <resultMap id="studentResultMap" type="com.stark.homework.entity.Student">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="stuNumber" column="stu_number" />
+        <result property="gender" column="gender" />
+        <result property="phone" column="phone" />
+        <result property="degree" column="degree" />
+        <result property="breakCount" column="break_count" />
+        <result property="minus" column="minus" />
+        <result property="createAt" column="create_at" />
+        <result property="updateAt" column="update_at" />
+        <association property="class_" column="class_id" select="com.stark.homework.mapper.ClassMapper.selectById"
+                     javaType="com.stark.homework.entity.Class"/>
+    </resultMap>
+
+    <!-- 查询语句 -->
+
+
+    <!-- 删除语句 -->
+
+
+    <!-- 插入语句 -->
+
+
+    <!-- 更新语句 -->
+
+</mapper>
