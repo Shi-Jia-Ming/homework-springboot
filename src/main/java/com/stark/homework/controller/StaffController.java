@@ -68,4 +68,33 @@ public class StaffController {
         List<Staff> staffList = staffService.search(staff);
         return new Response("员工信息模糊查询").ok(staffList, "成功");
     }
+
+    /**
+     * 新增员工信息
+     *
+     * @param token    用户 token
+     * @param id       用户 id
+     * @param username 用户名
+     * @param staff    员工信息
+     * @return 新增员工的 id
+     */
+    @Operation(summary = "新增员工信息")
+    @PostMapping("create")
+    public ResponseEntity<Object> create(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username,
+            @RequestBody Staff staff
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("新建员工信息").error("Jwt 验证失败");
+        }
+        // 判断该用户名是否已存在
+        if (staffService.isExist(staff.getUsername())) {
+            return new Response("新建员工信息").error("该用户名已被使用");
+        }
+        int staffId = staffService.create(staff);
+        return new Response("新建员工信息").ok(staffId, "成功");
+    }
 }

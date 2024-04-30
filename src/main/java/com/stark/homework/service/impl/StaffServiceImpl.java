@@ -27,4 +27,16 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff> search(Staff staff) {
         return staffMapper.selectWithLike(staff);
     }
+
+    @Override
+    public boolean isExist(String username) {
+        Staff staff = staffMapper.selectByUsername(username);
+        return !(staff == null);
+    }
+
+    @Override
+    public int create(Staff staff) {
+        staffMapper.insert(staff);
+        return staff.getId();
+    }
 }

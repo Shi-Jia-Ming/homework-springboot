@@ -20,4 +20,20 @@ public interface StaffService {
      * @return 模糊查询的结果
      */
     List<Staff> search(Staff staff);
+
+    /**
+     * 判断该用户名是否存在
+     *
+     * @param username 用户名
+     * @return 是否存在
+     */
+    boolean isExist(String username);
+
+    /**
+     * 创建员工信息
+     *
+     * @param staff 员工信息
+     * @return 新建的员工信息 id
+     */
+    int create(Staff staff);
 }
