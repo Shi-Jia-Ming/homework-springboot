@@ -22,4 +22,9 @@ public class ClassServiceImpl implements ClassService {
     public List<Class> getAll() {
         return classMapper.selectAll();
     }
+
+    @Override
+    public List<Class> search(Class class_) {
+        return classMapper.selectWithLike(class_);
+    }
 }

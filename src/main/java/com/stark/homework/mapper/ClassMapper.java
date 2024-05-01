@@ -21,4 +21,12 @@ public interface ClassMapper {
      * @return 班级信息列表
      */
     List<Class> selectAll();
+
+    /**
+     * 根据部分班级信息模糊查询
+     *
+     * @param class_ 部分班级信息
+     * @return 符合条件的班级列表
+     */
+    List<Class> selectWithLike(Class class_);
 }

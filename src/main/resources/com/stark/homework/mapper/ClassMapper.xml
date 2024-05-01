@@ -26,6 +26,20 @@
         select * from class;
     </select>
 
+    <select id="selectWithLike" resultMap="classResultMap">
+        select * from class
+        where id != -1
+        <if test="name != null">
+            and name like concat('%', #{name}, '%')
+        </if>
+        <if test="startDate != null">
+            and start_date > #{startDate}
+        </if>
+        <if test="endDate != null">
+            and #{endDate} > end_date
+        </if>
+    </select>
+
     <!-- 删除语句 -->
 
 
