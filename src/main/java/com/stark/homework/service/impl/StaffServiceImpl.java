@@ -50,4 +50,9 @@ public class StaffServiceImpl implements StaffService {
     public void update(Staff staff) {
         staffMapper.update(staff);
     }
+
+    @Override
+    public void delete(Staff staff) {
+        staffMapper.delete(staff);
+    }
 }

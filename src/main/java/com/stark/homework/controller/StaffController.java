@@ -125,4 +125,29 @@ public class StaffController {
         staffService.update(staff);
         return new Response("更改员工信息").ok("成功");
     }
+
+    /**
+     * 删除员工列表信息
+     *
+     * @param token     用户 token
+     * @param id        用户 id
+     * @param username  用户名
+     * @param staffList 待删除的员工列表
+     * @return 删除状态
+     */
+    @Operation(summary = "删除员工列表信息")
+    @PostMapping("delete")
+    public ResponseEntity<Object> delete(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username,
+            @RequestBody List<Staff> staffList
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("删除员工信息").error("Jwt 验证失败");
+        }
+        staffList.forEach((staffService::delete));
+        return new Response("删除员工信息").ok("成功");
+    }
 }

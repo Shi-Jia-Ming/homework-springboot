@@ -31,6 +31,7 @@ public interface StaffService {
 
     /**
      * 判断该用户是否存在
+     *
      * @param id 用户 id
      * @return 是否存在
      */
@@ -50,4 +51,11 @@ public interface StaffService {
      * @param staff 新的员工信息
      */
     void update(Staff staff);
+
+    /**
+     * 删除员工信息
+     *
+     * @param staff 待删除的员工信息
+     */
+    void delete(Staff staff);
 }
