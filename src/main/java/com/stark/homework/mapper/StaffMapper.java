@@ -26,6 +26,14 @@ public interface StaffMapper {
     Staff selectByUsername(String username);
 
     /**
+     * 模糊查询员工信息
+     *
+     * @param staff 员工部分信息
+     * @return 符合的员工信息列表
+     */
+    List<Staff> selectWithLike(Staff staff);
+
+    /**
      * 获取所有员工信息
      *
      * @return 员工信息列表

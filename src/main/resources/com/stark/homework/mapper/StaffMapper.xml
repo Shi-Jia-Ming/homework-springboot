@@ -30,6 +30,20 @@
         where username = #{username};
     </select>
 
+    <select id="selectWithLike" resultMap="staffResultMap" parameterType="com.stark.homework.entity.Staff">
+        select * from staff
+        where id != -1
+        <if test="name != null">
+            and name like concat('%', #{name}, '%')
+        </if>
+        <if test="gender != 0">
+            and gender = #{gender}
+        </if>
+        <if test="entryDate != null">
+            and date_format(entry_date, '%Y-%m-%d') like concat('%', #{entryDate}, '%')
+        </if>
+    </select>
+
     <select id="selectAll" resultMap="staffResultMap">
         select * from staff;
     </select>

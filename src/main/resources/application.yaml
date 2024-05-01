@@ -8,5 +8,12 @@ spring:
         username: root
         password: password
 
+    web:
+        resources:
+            static-locations: file:D:/homework/image/
+
 server:
     port: 9999
+
+resources:
+    image: file:D:/homework/image/
