@@ -37,9 +37,9 @@ create table staff
     update_at  datetime         not null comment '修改时间'
 ) comment '员工表';
 
-INSERT INTO staff
+insert into staff
 (id, username, password, name, gender, image, job, entry_date, dept_id, create_at, update_at)
-VALUES (1, 'jinyong', '123456', '金庸', 1, '1.jpg', 4, '2000-01-01', 2, now(), now()),
+values (1, 'jinyong', '123456', '金庸', 1, '1.jpg', 4, '2000-01-01', 2, now(), now()),
        (2, 'zhangwuji', '123456', '张无忌', 1, '2.jpg', 2, '2015-01-01', 2, now(), now()),
        (3, 'yangxiao', '123456', '杨逍', 1, '3.jpg', 2, '2008-05-01', 2, now(), now()),
        (4, 'weiyixiao', '123456', '韦一笑', 1, '4.jpg', 2, '2007-01-01', 2, now(), now()),
@@ -57,5 +57,59 @@ VALUES (1, 'jinyong', '123456', '金庸', 1, '1.jpg', 4, '2000-01-01', 2, now(),
        (16, 'songyuanqiao', '123456', '宋远桥', 1, '16.jpg', 2, '2007-01-01', 2, now(), now()),
        (17, 'chenyouliang', '123456', '陈友谅', 1, '17.jpg', NULL, '2015-03-21', NULL, now(), now());
 
+-- 班级管理
+drop table if exists class;
+create table class
+(
+    id              int unsigned primary key auto_increment comment 'ID',
+    name            varchar(20)  not null unique comment '班级名称',
+    classroom       varchar(20)  not null comment '班级教室',
+    start_date      date         not null comment '开课时间',
+    end_date        date         not null comment '结课时间',
+    head_teacher_id int unsigned not null comment '班主任ID',
+    create_at       datetime     not null comment '创建时间',
+    update_at       datetime     not null comment '修改时间'
+) comment '班级表';
 
+insert into class
+(id, name, classroom, start_date, end_date, head_teacher_id, create_at, update_at)
+values (1, '2024第01期01班', 'G102', '2024-03-01', '2024-04-15', 10, now(), now()),
+       (2, '2024第01期02班', 'G102', '2024-03-01', '2024-04-15', 8, now(), now()),
+       (3, '2024第01期03班', 'G102', '2024-03-01', '2024-04-15', 8, now(), now()),
+       (4, '2024第01期04班', 'G102', '2024-03-01', '2024-04-15', 8, now(), now()),
+       (5, '2024第01期05班', 'G102', '2024-03-01', '2024-04-15', 8, now(), now()),
+       (6, '2024第01期06班', 'G102', '2024-03-01', '2024-04-15', 8, now(), now()),
+       (7, '2024第01期07班', 'G102', '2024-03-01', '2024-04-15', 8, now(), now()),
+       (8, '2024第01期08班', 'G102', '2024-03-01', '2024-04-15', 8, now(), now()),
+       (9, '2024第01期09班', 'G102', '2024-03-01', '2024-04-15', 8, now(), now()),
+       (10, '2024第01期10班', 'G102', '2024-03-01', '2024-04-15', 8, now(), now());
 
+-- 学员管理
+drop table if exists student;
+create table student
+(
+    id          int unsigned primary key auto_increment comment 'ID',
+    name        varchar(20)      not null comment '姓名',
+    stu_number  varchar(20) unique comment '学号',
+    class_id    int unsigned     not null comment '班级ID',
+    gender      tinyint unsigned not null comment '性别',
+    phone       varchar(20)      not null comment '手机号',
+    degree      tinyint unsigned not null comment '最高学历, 说明: 1.本科, 2.大专',
+    break_count int unsigned     not null comment '违纪次数',
+    minus       int unsigned     not null comment '违纪扣分',
+    create_at   datetime         not null comment '创建时间',
+    update_at   datetime         not null comment '修改时间'
+);
+
+insert into student
+(id, name, stu_number, class_id, gender, phone, degree, break_count, minus, create_at, update_at)
+values (1, '张三', 'A220505001', 1, 1, '1880909xxxx', 1, 1, 5, now(), now()),
+       (2, '李四', 'A220505002', 2, 1, '1880909xxxx', 1, 1, 5, now(), now()),
+       (3, '周云梦', 'A220505003', 3, 2, '1880909xxxx', 1, 1, 5, now(), now()),
+       (4, '王五', 'A220505004', 4, 1, '1880909xxxx', 1, 1, 5, now(), now()),
+       (5, '赵六', 'A220505005', 5, 1, '1880909xxxx', 1, 1, 5, now(), now()),
+       (6, '七大姑', 'A220505006', 6, 1, '1880909xxxx', 1, 1, 5, now(), now()),
+       (7, '八大姨', 'A220505007', 7, 1, '1880909xxxx', 1, 1, 5, now(), now()),
+       (8, '小九', 'A220505008', 8, 1, '1880909xxxx', 1, 1, 5, now(), now()),
+       (9, 'XXX', 'A220505009', 9, 1, '1880909xxxx', 1, 1, 5, now(), now()),
+       (10, 'XXX', 'A220505010', 10, 1, '1880909xxxx', 1, 1, 5, now(), now());

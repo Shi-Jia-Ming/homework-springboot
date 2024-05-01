@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stark.homework.mapper.ClassMapper">
+
+    <resultMap id="classResultMap" type="com.stark.homework.entity.Class">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="classroom" column="classroom" />
+        <result property="startDate" column="start_date" />
+        <result property="endDate" column="end_date" />
+        <result property="createAt" column="create_at" />
+        <result property="updateAt" column="update_at" />
+        <association property="headTeacher" column="head_teacher_id" select="com.stark.homework.mapper.StaffMapper.selectById"
+                     javaType="com.stark.homework.entity.Staff"/>
+    </resultMap>
+
+    <!-- 查询语句 -->
+    <select id="selectById" resultMap="classResultMap">
+        select * from class
+        where id = #{id};
+    </select>
+
+    <!-- 删除语句 -->
+
+
+    <!-- 插入语句 -->
+
+
+    <!-- 更新语句 -->
+
+</mapper>
