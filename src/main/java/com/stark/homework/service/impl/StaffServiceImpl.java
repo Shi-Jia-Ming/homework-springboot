@@ -35,8 +35,19 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
+    public boolean isExist(int id) {
+        Staff staff = staffMapper.selectById(id);
+        return !(staff == null);
+    }
+
+    @Override
     public int create(Staff staff) {
         staffMapper.insert(staff);
         return staff.getId();
+    }
+
+    @Override
+    public void update(Staff staff) {
+        staffMapper.update(staff);
     }
 }

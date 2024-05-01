@@ -30,10 +30,24 @@ public interface StaffService {
     boolean isExist(String username);
 
     /**
+     * 判断该用户是否存在
+     * @param id 用户 id
+     * @return 是否存在
+     */
+    boolean isExist(int id);
+
+    /**
      * 创建员工信息
      *
      * @param staff 员工信息
      * @return 新建的员工信息 id
      */
     int create(Staff staff);
+
+    /**
+     * 更新员工信息
+     *
+     * @param staff 新的员工信息
+     */
+    void update(Staff staff);
 }

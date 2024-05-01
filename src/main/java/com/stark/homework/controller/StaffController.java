@@ -97,4 +97,32 @@ public class StaffController {
         int staffId = staffService.create(staff);
         return new Response("新建员工信息").ok(staffId, "成功");
     }
+
+    /**
+     * 更改员工信息
+     *
+     * @param token    用户 token
+     * @param id       用户 id
+     * @param username 用户名
+     * @param staff    新的员工信息
+     * @return 返回更新状态
+     */
+    @Operation(summary = "更改员工信息")
+    @PostMapping("edit")
+    public ResponseEntity<Object> edit(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username,
+            @RequestBody Staff staff
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("更改员工信息").error("Jwt 验证失败");
+        }
+        if (!(staffService.isExist(staff.getId()))) {
+            return new Response("更改员工信息").error("员工不存在");
+        }
+        staffService.update(staff);
+        return new Response("更改员工信息").ok("成功");
+    }
 }
