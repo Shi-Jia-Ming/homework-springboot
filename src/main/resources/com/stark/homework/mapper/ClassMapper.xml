@@ -22,6 +22,10 @@
         where id = #{id};
     </select>
 
+    <select id="selectAll" resultMap="classResultMap">
+        select * from class;
+    </select>
+
     <!-- 删除语句 -->
 
 
