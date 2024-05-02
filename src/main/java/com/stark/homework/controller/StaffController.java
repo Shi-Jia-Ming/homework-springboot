@@ -70,6 +70,29 @@ public class StaffController {
     }
 
     /**
+     * 获取班主任信息
+     *
+     * @param token    用户 token
+     * @param id       用户 id
+     * @param username 用户名
+     * @return 班主任信息列表
+     */
+    @Operation(summary = "获取班主任信息")
+    @GetMapping("getHeadTeacher")
+    public ResponseEntity<Object> getHeadTeacherList(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("获取班主任信息").error("Jwt 验证失败");
+        }
+        List<Staff> headTeacher = staffService.getHeadTeacher();
+        return new Response("获取班主任信息").ok(headTeacher, "成功");
+    }
+
+    /**
      * 新增员工信息
      *
      * @param token    用户 token

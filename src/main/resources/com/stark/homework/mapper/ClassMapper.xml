@@ -5,29 +5,86 @@
 <mapper namespace="com.stark.homework.mapper.ClassMapper">
 
     <resultMap id="classResultMap" type="com.stark.homework.entity.Class">
-        <id property="id" column="id" />
-        <result property="name" column="name" />
-        <result property="classroom" column="classroom" />
-        <result property="startDate" column="start_date" />
-        <result property="endDate" column="end_date" />
-        <result property="createAt" column="create_at" />
-        <result property="updateAt" column="update_at" />
-        <association property="headTeacher" column="head_teacher_id" select="com.stark.homework.mapper.StaffMapper.selectById"
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="classroom" column="classroom"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="createAt" column="create_at"/>
+        <result property="updateAt" column="update_at"/>
+        <association property="headTeacher" column="head_teacher_id"
+                     select="com.stark.homework.mapper.StaffMapper.selectById"
                      javaType="com.stark.homework.entity.Staff"/>
     </resultMap>
 
     <!-- 查询语句 -->
     <select id="selectById" resultMap="classResultMap">
-        select * from class
+        select *
+        from class
         where id = #{id};
     </select>
 
-    <!-- 删除语句 -->
+    <select id="selectAll" resultMap="classResultMap">
+        select *
+        from class;
+    </select>
 
+    <select id="selectWithLike" resultMap="classResultMap">
+        select * from class
+        where id != -1
+        <if test="name != null">
+            and name like concat('%', #{name}, '%')
+        </if>
+        <if test="startDate != null">
+            and start_date > #{startDate}
+        </if>
+        <if test="endDate != null">
+            and #{endDate} > end_date
+        </if>
+    </select>
+
+    <select id="selectByName" resultMap="classResultMap">
+        select *
+        from class
+        where name = #{name};
+    </select>
+
+    <!-- 删除语句 -->
+    <delete id="delete">
+        delete from class
+        where id = #{id};
+    </delete>
 
     <!-- 插入语句 -->
-
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into class(name, classroom, start_date, end_date, head_teacher_id, create_at, update_at)
+            value (#{name}, #{classroom}, #{startDate}, #{endDate}, #{headTeacher.id}, #{createAt}, #{updateAt});
+    </insert>
 
     <!-- 更新语句 -->
-
+    <update id="update">
+        update class
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="classroom != null">
+                classroom = #{classroom},
+            </if>
+            <if test="startDate != null">
+                start_date = #{startDate},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate},
+            </if>
+            <if test="headTeacher != null">
+                head_teacher_id = #{headTeacher.id},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt},
+            </if>
+        </set>
+        where id = #{id};
+    </update>
+    
 </mapper>
