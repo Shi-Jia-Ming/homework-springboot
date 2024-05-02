@@ -14,6 +14,13 @@ public interface StaffService {
     List<Staff> getAll();
 
     /**
+     * 获取所有班主任信息
+     *
+     * @return 班主任信息列表
+     */
+    List<Staff> getHeadTeacher();
+
+    /**
      * 根据部分员工信息模糊查询
      *
      * @param staff 部分员工信息
