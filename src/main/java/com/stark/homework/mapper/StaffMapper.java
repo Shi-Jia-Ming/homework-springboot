@@ -41,6 +41,13 @@ public interface StaffMapper {
     List<Staff> selectAll();
 
     /**
+     * 获取所有班主任信息
+     *
+     * @return 班主任信息列表
+     */
+    List<Staff> selectHeadTeacher();
+
+    /**
      * 删除员工数据
      *
      * @param staff 待删除的员工数据

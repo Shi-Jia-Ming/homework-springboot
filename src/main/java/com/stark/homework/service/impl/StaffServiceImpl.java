@@ -24,6 +24,11 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
+    public List<Staff> getHeadTeacher() {
+        return staffMapper.selectHeadTeacher();
+    }
+
+    @Override
     public List<Staff> search(Staff staff) {
         return staffMapper.selectWithLike(staff);
     }

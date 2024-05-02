@@ -48,6 +48,11 @@
         select * from staff;
     </select>
 
+    <select id="selectHeadTeacher" resultMap="staffResultMap">
+        select * from staff
+        where job = 1;
+    </select>
+
 
     <!-- 删除语句 -->
     <delete id="delete">
