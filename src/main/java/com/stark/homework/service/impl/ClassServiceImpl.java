@@ -27,4 +27,32 @@ public class ClassServiceImpl implements ClassService {
     public List<Class> search(Class class_) {
         return classMapper.selectWithLike(class_);
     }
+
+    @Override
+    public boolean isExist(String name) {
+        Class class_ = classMapper.selectByName(name);
+        return !(class_ == null);
+    }
+
+    @Override
+    public boolean isExist(int id) {
+        Class class_ = classMapper.selectById(id);
+        return !(class_ == null);
+    }
+
+    @Override
+    public int insert(Class class_) {
+        classMapper.insert(class_);
+        return class_.getId();
+    }
+
+    @Override
+    public void delete(Class class_) {
+        classMapper.delete(class_);
+    }
+
+    @Override
+    public void update(Class class_) {
+        classMapper.update(class_);
+    }
 }
