@@ -37,4 +37,18 @@ public interface StudentMapper {
      * @param student 新的学生数据
      */
     void insert(Student student);
+
+    /**
+     * 更新学生数据
+     *
+     * @param student 新的学生数据
+     */
+    void update(Student student);
+
+    /**
+     * 删除学生数据
+     *
+     * @param student 待删除的学生数据
+     */
+    void delete(Student student);
 }

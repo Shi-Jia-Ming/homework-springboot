@@ -72,7 +72,66 @@ public class StudentController {
         if (studentService.isExist(student.getStuNumber())) {
             return new Response("新建学生信息").error("学号已存在");
         }
-        studentService.insert(student);
-        return new Response("新建学生信息").ok("成功");
+        int studentId = studentService.insert(student);
+        return new Response("新建学生信息").ok(studentId, "成功");
+    }
+
+    /**
+     * 更改学生信息
+     *
+     * @param token    用户 token
+     * @param id       用户 id
+     * @param username 用户名
+     * @param student  新的学生信息
+     * @return 更新的状态
+     */
+    @Operation(summary = "更改学生信息")
+    @PostMapping("update")
+    public ResponseEntity<Object> update(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username,
+            @RequestBody Student student
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("更改学生信息").error("Jwt 验证失败");
+        }
+        // TODO 更新数据中的相同值验证
+        // 判断学号是否已经存在
+        if (studentService.isExist(student.getStuNumber())) {
+            return new Response("更改学生信息").error("学号已存在");
+        }
+        studentService.update(student);
+        return new Response("更改学生信息").ok("成功");
+    }
+
+    /**
+     * 删除学生信息
+     *
+     * @param token    用户 token
+     * @param id       用户 id
+     * @param username 用户名
+     * @param student  待删除的学生信息
+     * @return 删除状态
+     */
+    @Operation(summary = "删除学生信息")
+    @PostMapping("delete")
+    public ResponseEntity<Object> delete(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username,
+            @RequestBody Student student
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("删除学生信息").error("Jwt 验证失败");
+        }
+        // 判断学生信息是否存在
+        if (!studentService.isExist(student.getId())) {
+            return new Response("删除学生信息").error("该学生信息不存在");
+        }
+        studentService.delete(student);
+        return new Response("删除学生信息").ok("成功");
     }
 }

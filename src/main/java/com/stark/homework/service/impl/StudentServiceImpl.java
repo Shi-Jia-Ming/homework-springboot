@@ -30,8 +30,24 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public boolean isExist(int id) {
+        Student student = studentMapper.selectById(id);
+        return !(student == null);
+    }
+
+    @Override
     public int insert(Student student) {
         studentMapper.insert(student);
         return student.getId();
+    }
+
+    @Override
+    public void update(Student student) {
+        studentMapper.update(student);
+    }
+
+    @Override
+    public void delete(Student student) {
+        studentMapper.delete(student);
     }
 }

@@ -18,9 +18,17 @@ public interface StudentService {
      * 判断学生信息是否存在
      *
      * @param stuNumber 学号
-     * @return 返回学生信息
+     * @return 学生信息
      */
     boolean isExist(String stuNumber);
+
+    /**
+     * 判断学生信息是否存在
+     *
+     * @param id 学生 id
+     * @return 学生信息
+     */
+    boolean isExist(int id);
 
     /**
      * 插入新的学生数据
@@ -29,4 +37,18 @@ public interface StudentService {
      * @return 新数据的 id
      */
     int insert(Student student);
+
+    /**
+     * 更新学生数据
+     *
+     * @param student 新的学生数据
+     */
+    void update(Student student);
+
+    /**
+     * 删除学生数据
+     *
+     * @param student 待删除的学生数据
+     */
+    void delete(Student student);
 }
