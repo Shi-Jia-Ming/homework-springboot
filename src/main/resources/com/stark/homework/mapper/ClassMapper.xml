@@ -78,7 +78,7 @@
                 end_date = #{endDate},
             </if>
             <if test="headTeacher != null">
-                tead_teacher_id = #{headTeacher.id},
+                head_teacher_id = #{headTeacher.id},
             </if>
             <if test="updateAt != null">
                 update_at = #{updateAt},
