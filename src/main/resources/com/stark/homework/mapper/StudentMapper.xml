@@ -29,11 +29,19 @@
         select * from student;
     </select>
 
+    <select id="selectByStuNumber" resultMap="studentResultMap">
+        select * from student
+        where stu_number = #{stuNumber};
+    </select>
+
     <!-- 删除语句 -->
 
 
     <!-- 插入语句 -->
-
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into student(name, stu_number, class_id, gender, phone, degree, break_count, minus, create_at, update_at)
+        value(#{name}, #{stuNumber}, #{class_.id}, #{gender}, #{phone}, #{degree}, #{breakCount}, #{minus}, #{createAt}, #{updateAt});
+    </insert>
 
     <!-- 更新语句 -->
 

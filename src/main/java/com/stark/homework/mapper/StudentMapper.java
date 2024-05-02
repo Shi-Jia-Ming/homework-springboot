@@ -22,4 +22,19 @@ public interface StudentMapper {
      * @return 学生信息列表
      */
     List<Student> selectAll();
+
+    /**
+     * 根据学号查询学生信息
+     *
+     * @param stuNumber 学号
+     * @return 学生信息
+     */
+    Student selectByStuNumber(String stuNumber);
+
+    /**
+     * 插入学生数据
+     *
+     * @param student 新的学生数据
+     */
+    void insert(Student student);
 }

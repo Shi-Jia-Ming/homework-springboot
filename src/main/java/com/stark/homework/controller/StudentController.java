@@ -8,10 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,5 +45,34 @@ public class StudentController {
         }
         List<Student> students = studentService.getAll();
         return new Response("获取学生信息").ok(students, "成功");
+    }
+
+    /**
+     * 新建学生信息
+     *
+     * @param token    用户 token
+     * @param id       用户 id
+     * @param username 用户名
+     * @param student  新的学生信息
+     * @return 新数据的 id
+     */
+    @Operation(summary = "新建学生信息")
+    @PostMapping("create")
+    public ResponseEntity<Object> create(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username,
+            @RequestBody Student student
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("新建学生信息").error("Jwt 验证失败");
+        }
+        // 判断学号是否已经存在
+        if (studentService.isExist(student.getStuNumber())) {
+            return new Response("新建学生信息").error("学号已存在");
+        }
+        studentService.insert(student);
+        return new Response("新建学生信息").ok("成功");
     }
 }

@@ -22,4 +22,16 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getAll() {
         return studentMapper.selectAll();
     }
+
+    @Override
+    public boolean isExist(String stuNumber) {
+        Student student = studentMapper.selectByStuNumber(stuNumber);
+        return !(student == null);
+    }
+
+    @Override
+    public int insert(Student student) {
+        studentMapper.insert(student);
+        return student.getId();
+    }
 }
