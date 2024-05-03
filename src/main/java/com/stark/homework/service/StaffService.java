@@ -21,6 +21,28 @@ public interface StaffService {
     List<Staff> getHeadTeacher();
 
     /**
+     * 获取男性职员数量
+     *
+     * @return 男性职员数量
+     */
+    int searchMaleCount();
+
+    /**
+     * 获取女性职员数量
+     *
+     * @return 女性职员数量
+     */
+    int searchFemaleCount();
+
+    /**
+     * 获取职位的人数
+     *
+     * @param job 职位
+     * @return 该职位的人数
+     */
+    int searchJobCount(int job);
+
+    /**
      * 根据部分员工信息模糊查询
      *
      * @param staff 部分员工信息
