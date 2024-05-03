@@ -118,6 +118,7 @@ public class ClassController {
             @RequestHeader("Username") String username,
             @RequestBody Class class_
     ) {
+        // TODO 不能删除非空班级
         // 进行 Jwt 验证
         if (!JwtAuthentication.authentication(token, id, username)) {
             return new Response("删除班级信息").error("Jwt 验证失败");
