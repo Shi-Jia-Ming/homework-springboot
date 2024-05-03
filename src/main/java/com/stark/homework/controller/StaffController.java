@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("staff")
@@ -90,6 +92,56 @@ public class StaffController {
         }
         List<Staff> headTeacher = staffService.getHeadTeacher();
         return new Response("获取班主任信息").ok(headTeacher, "成功");
+    }
+
+    /**
+     * 获取职员性别的数量
+     *
+     * @param token    用户 token
+     * @param id       用户 id
+     * @param username 用户名
+     * @return 职员性别的数量
+     */
+    @Operation(summary = "获取职员性别的数量")
+    @GetMapping("getGenderCount")
+    public ResponseEntity<Object> getGenderCount(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("获取职员性别的数量").error("Jwt 验证失败");
+        }
+        Map<String, Object> result = new HashMap<>();
+        result.put("male", staffService.searchMaleCount());
+        result.put("female", staffService.searchFemaleCount());
+        return new Response("获取职员性别的数量").ok(result, "成功");
+    }
+
+    /**
+     * 获取职员职位的数量
+     *
+     * @param token    用户 token
+     * @param id       用户 id
+     * @param username 用户名
+     * @param job      职位种类
+     * @return 该职位的人数
+     */
+    @Operation(summary = "获取职员职位的数量")
+    @PostMapping("getJobCount")
+    public ResponseEntity<Object> getJobCount(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username,
+            @RequestParam("job") int job
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("获取职员职位的数量").error("Jwt 验证失败");
+        }
+        int count = staffService.searchJobCount(job);
+        return new Response("获取职员职位的数量").ok(count, "成功");
     }
 
     /**
