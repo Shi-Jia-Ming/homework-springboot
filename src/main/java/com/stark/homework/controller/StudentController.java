@@ -125,10 +125,10 @@ public class StudentController {
     /**
      * 删除学生信息
      *
-     * @param token    用户 token
-     * @param id       用户 id
-     * @param username 用户名
-     * @param student  待删除的学生信息
+     * @param token       用户 token
+     * @param id          用户 id
+     * @param username    用户名
+     * @param studentList 待删除的学生信息
      * @return 删除状态
      */
     @Operation(summary = "删除学生信息")
@@ -137,17 +137,13 @@ public class StudentController {
             @RequestHeader("Token") String token,
             @RequestHeader("User-Id") int id,
             @RequestHeader("Username") String username,
-            @RequestBody Student student
+            @RequestBody List<Student> studentList
     ) {
         // 进行 Jwt 验证
         if (!JwtAuthentication.authentication(token, id, username)) {
             return new Response("删除学生信息").error("Jwt 验证失败");
         }
-        // 判断学生信息是否存在
-        if (!studentService.isExist(student.getId())) {
-            return new Response("删除学生信息").error("该学生信息不存在");
-        }
-        studentService.delete(student);
+        studentList.forEach((studentService::delete));
         return new Response("删除学生信息").ok("成功");
     }
 }
