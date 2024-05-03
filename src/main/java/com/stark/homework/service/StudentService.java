@@ -26,7 +26,7 @@ public interface StudentService {
      * 判断学生信息是否存在
      *
      * @param stuNumber 学号
-     * @return 学生信息
+     * @return 是否存在
      */
     boolean isExist(String stuNumber);
 
@@ -34,9 +34,17 @@ public interface StudentService {
      * 判断学生信息是否存在
      *
      * @param id 学生 id
-     * @return 学生信息
+     * @return 是否存在
      */
     boolean isExist(int id);
+
+    /**
+     * 判断该学号是否被其他学员使用
+     * @param id 学员 id
+     * @param stuNumber 学号
+     * @return 是否重复
+     */
+    boolean isExist(int id, String stuNumber);
 
     /**
      * 插入新的学生数据

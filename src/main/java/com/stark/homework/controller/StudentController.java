@@ -115,7 +115,7 @@ public class StudentController {
         }
         // TODO 更新数据中的相同值验证
         // 判断学号是否已经存在
-        if (studentService.isExist(student.getStuNumber())) {
+        if (studentService.isExist(student.getId(), student.getStuNumber())) {
             return new Response("更改学生信息").error("学号已存在");
         }
         studentService.update(student);
