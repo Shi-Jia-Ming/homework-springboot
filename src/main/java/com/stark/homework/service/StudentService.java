@@ -15,6 +15,14 @@ public interface StudentService {
     List<Student> getAll();
 
     /**
+     * 根据部分学生信息模糊查询
+     *
+     * @param student 部分学生信息
+     * @return 符合条件的信息列表
+     */
+    List<Student> search(Student student);
+
+    /**
      * 判断学生信息是否存在
      *
      * @param stuNumber 学号

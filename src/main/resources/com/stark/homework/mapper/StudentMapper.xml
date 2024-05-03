@@ -29,6 +29,23 @@
         select * from student;
     </select>
 
+    <select id="search" resultMap="studentResultMap">
+        select * from student
+        where id != -1
+        <if test="name != null">
+            and name like concat('%',#{name} , '%')
+        </if>
+        <if test="stuNumber != null">
+            and stu_number like concat('%',#{stuNumber} , '%')
+        </if>
+        <if test="gender != 0">
+            and gender = #{gender}
+        </if>
+        <if test="class_ != null">
+            and class_id = #{class_.id}
+        </if>
+    </select>
+
     <select id="selectByStuNumber" resultMap="studentResultMap">
         select * from student
         where stu_number = #{stuNumber};

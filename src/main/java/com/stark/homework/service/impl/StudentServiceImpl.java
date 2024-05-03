@@ -24,6 +24,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List<Student> search(Student student) {
+        return studentMapper.search(student);
+    }
+
+    @Override
     public boolean isExist(String stuNumber) {
         Student student = studentMapper.selectByStuNumber(stuNumber);
         return !(student == null);

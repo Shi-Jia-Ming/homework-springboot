@@ -24,6 +24,14 @@ public interface StudentMapper {
     List<Student> selectAll();
 
     /**
+     * 根据部分学生信息模糊查询
+     *
+     * @param student 部分学生信息
+     * @return 符合条件的信息列表
+     */
+    List<Student> search(Student student);
+
+    /**
      * 根据学号查询学生信息
      *
      * @param stuNumber 学号

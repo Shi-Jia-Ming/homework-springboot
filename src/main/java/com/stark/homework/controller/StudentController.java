@@ -47,6 +47,22 @@ public class StudentController {
         return new Response("获取学生信息").ok(students, "成功");
     }
 
+    @Operation(summary = "根据部分学生信息模糊查询")
+    @PostMapping("search")
+    public ResponseEntity<Object> search(
+            @RequestHeader("Token") String token,
+            @RequestHeader("User-Id") int id,
+            @RequestHeader("Username") String username,
+            @RequestBody Student student
+    ) {
+        // 进行 Jwt 验证
+        if (!JwtAuthentication.authentication(token, id, username)) {
+            return new Response("模糊查询学生信息").error("Jwt 验证失败");
+        }
+        List<Student> students = studentService.search(student);
+        return new Response("模糊查询学生信息").ok(students, "成功");
+    }
+
     /**
      * 新建学生信息
      *
