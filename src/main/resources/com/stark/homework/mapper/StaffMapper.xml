@@ -53,6 +53,21 @@
         where job = 1;
     </select>
 
+    <select id="searchMaleCount" resultType="int">
+        select count(*) from staff
+        where gender = 1;
+    </select>
+
+    <select id="searchFemaleCount" resultType="int">
+        select count(*) from staff
+        where gender = 2;
+    </select>
+
+    <select id="searchJobCount" resultType="int">
+        select count(*) from staff
+        where job = #{job};
+    </select>
+
 
     <!-- 删除语句 -->
     <delete id="delete">

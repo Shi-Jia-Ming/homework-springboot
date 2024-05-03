@@ -48,6 +48,28 @@ public interface StaffMapper {
     List<Staff> selectHeadTeacher();
 
     /**
+     * 查询男性职员的数量
+     *
+     * @return 男性职员的数量
+     */
+    int searchMaleCount();
+
+    /**
+     * 查询女性职员的数量
+     *
+     * @return 女性职员的数量
+     */
+    int searchFemaleCount();
+
+    /**
+     * 查询某个职位的人数
+     *
+     * @param job 职位
+     * @return 该职位的人数
+     */
+    int searchJobCount(int job);
+
+    /**
      * 删除员工数据
      *
      * @param staff 待删除的员工数据

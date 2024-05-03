@@ -29,6 +29,21 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
+    public int searchMaleCount() {
+        return staffMapper.searchMaleCount();
+    }
+
+    @Override
+    public int searchFemaleCount() {
+        return staffMapper.searchFemaleCount();
+    }
+
+    @Override
+    public int searchJobCount(int job) {
+        return staffMapper.searchJobCount(job);
+    }
+
+    @Override
     public List<Staff> search(Staff staff) {
         return staffMapper.selectWithLike(staff);
     }
