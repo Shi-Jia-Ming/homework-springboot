@@ -29,12 +29,76 @@
         select * from student;
     </select>
 
-    <!-- 删除语句 -->
+    <select id="search" resultMap="studentResultMap">
+        select * from student
+        where id != -1
+        <if test="name != null">
+            and name like concat('%',#{name} , '%')
+        </if>
+        <if test="stuNumber != null">
+            and stu_number like concat('%',#{stuNumber} , '%')
+        </if>
+        <if test="gender != 0">
+            and gender = #{gender}
+        </if>
+        <if test="class_ != null">
+            and class_id = #{class_.id}
+        </if>
+    </select>
 
+    <select id="selectByStuNumber" resultMap="studentResultMap">
+        select * from student
+        where stu_number = #{stuNumber};
+    </select>
+
+    <!-- 删除语句 -->
+    <delete id="delete">
+        delete from student
+        where id = #{id};
+    </delete>
 
     <!-- 插入语句 -->
-
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into student(name, stu_number, class_id, gender, phone, degree, break_count, minus, create_at, update_at)
+        value(#{name}, #{stuNumber}, #{class_.id}, #{gender}, #{phone}, #{degree}, #{breakCount}, #{minus}, #{createAt}, #{updateAt});
+    </insert>
 
     <!-- 更新语句 -->
+    <update id="update">
+        update student
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="stuNumber != null">
+                stu_number = #{stuNumber},
+            </if>
+            <if test="class_ != null">
+                class_id = #{class_.id},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="degree != null">
+                degree = #{degree},
+            </if>
+            <if test="breakCount != null">
+                break_count = #{breakCount},
+            </if>
+            <if test="minus != null">
+                minus = #{minus},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt},
+            </if>
+        </set>
+        where id = #{id};
+    </update>
 
 </mapper>
