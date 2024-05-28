@@ -63,7 +63,7 @@ public class UploadController {
      * @return 删除状态
      */
     @Operation(summary = "删除文件")
-    @PostMapping("/delete")
+    @PostMapping("delete")
     public ResponseEntity<Object> delete(@RequestParam("fileName") String fileName) {
         if (!uploadService.isExist(fileName, imageUploadPath)) {
             return new Response("删除文件").error("文件不存在");
